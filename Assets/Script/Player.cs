@@ -31,5 +31,6 @@ public class Player : MonoBehaviour
     public void attack(bool isAttack)
     {
         animator.SetBool("IsAttack", isAttack);
+        //attackEvent();
     }
 }
