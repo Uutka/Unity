@@ -6,37 +6,44 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     //public Text Panel_info;
-    public Button Left;
-    public Button Right;
+    [SerializeField]
+    private Button Left;
+    [SerializeField]
+    private Button Right;
     //public SpriteRenderer playerSprite;
-    private Player pc;
+    [SerializeField] private Player playerCharacter;
     private bool flip = false;
     //private MoveState _moveState = MoveState.Idle;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        //Panel_info.text = "None";
-        pc = GetComponent<Player>();
+        if (playerCharacter == null) GameObject.FindGameObjectsWithTag("player");
+    }
+    private void Start()
+    {
         Left.onClick.AddListener(OnClickLeft);
         Right.onClick.AddListener(OnClickRight);
-        //playerSprite.flipX = false;
     }
 
-    public void OnClickLeft()
+    private void Update()
     {
-       // Panel_info.text = "Left";
-        flip = true;
+        //playerCharacter.animator.SetBool("IsAttack", false);
     }
 
-    public void OnClickRight()
+    private void OnClickLeft()
     {
-        //Panel_info.text = "Right";
-        flip = false;
+        Debug.Log("Click left");
+        playerCharacter.move(true);
+        playerCharacter.attack(true);
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnClickRight()
     {
-        pc.move(flip);
+        Debug.Log("Click Right");
+        playerCharacter.move(false);
+        playerCharacter.attack(true);
+        
     }
+
 }
